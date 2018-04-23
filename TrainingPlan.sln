@@ -15,11 +15,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.WebApi", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.WebMvc", "src\TrainingPlan.WebMvc\TrainingPlan.WebMvc.csproj", "{77AF2852-5425-4BEF-AB88-1F904F83D4E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingPlan.WebApi.UnitTest", "test\TrainingPlan.WebApi.UnitTest\TrainingPlan.WebApi.UnitTest.csproj", "{D5EE8236-F6E1-4FAC-B962-C2241D8B694D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.WebApi.UnitTest", "test\TrainingPlan.WebApi.UnitTest\TrainingPlan.WebApi.UnitTest.csproj", "{D5EE8236-F6E1-4FAC-B962-C2241D8B694D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingPlan.WebApi.FunctionalTest", "test\TrainingPlan.WebApi.FunctionalTest\TrainingPlan.WebApi.FunctionalTest.csproj", "{12344089-7FAA-4E39-B0FC-253D197FF495}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.WebApi.FunctionalTest", "test\TrainingPlan.WebApi.FunctionalTest\TrainingPlan.WebApi.FunctionalTest.csproj", "{12344089-7FAA-4E39-B0FC-253D197FF495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingPlan.WebApi.IntegrationTest", "test\TrainingPlan.WebApi.IntegrationTest\TrainingPlan.WebApi.IntegrationTest.csproj", "{13793439-FA18-4244-BBB9-B1AFF91A2BEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.WebApi.IntegrationTest", "test\TrainingPlan.WebApi.IntegrationTest\TrainingPlan.WebApi.IntegrationTest.csproj", "{13793439-FA18-4244-BBB9-B1AFF91A2BEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.ApplicationCore.UnitTest", "test\TrainingPlan.ApplicationCore.UnitTest\TrainingPlan.ApplicationCore.UnitTest.csproj", "{E61C1F64-419D-4E75-B427-63F2CC2BBE6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrainingPlan.Infrastructure.UnitTest", "test\TrainingPlan.Infrastructure.UnitTest\TrainingPlan.Infrastructure.UnitTest.csproj", "{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{694E5A44-11D3-44EF-ACCC-F738B48554BB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +64,14 @@ Global
 		{13793439-FA18-4244-BBB9-B1AFF91A2BEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13793439-FA18-4244-BBB9-B1AFF91A2BEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13793439-FA18-4244-BBB9-B1AFF91A2BEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +84,8 @@ Global
 		{D5EE8236-F6E1-4FAC-B962-C2241D8B694D} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 		{12344089-7FAA-4E39-B0FC-253D197FF495} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 		{13793439-FA18-4244-BBB9-B1AFF91A2BEB} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
+		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
+		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09A7345D-4927-4DA9-88C9-DA944A06C604}

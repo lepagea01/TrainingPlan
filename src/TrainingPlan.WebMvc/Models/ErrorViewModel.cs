@@ -1,5 +1,3 @@
-using System;
-
 namespace TrainingPlan.WebMvc.Models
 {
     public class ErrorViewModel
