@@ -39,7 +39,6 @@ dotnet restore
 dotnet ef database update -c TrainingPlanContext -s TrainingPlan.WebApi.csproj -p ..\TrainingPlan.Infrastructure\TrainingPlan.Infrastructure.csproj
 ```
 
-The first command makes sure all dependencies and tools of the TrainingPlan.WebApi project are restored while
-the second will create the sole database for the sample.
+   The first command makes sure all dependencies and tools of the TrainingPlan.WebApi project are restored while the second will create the sole database for the sample.
 
 3. Run the sample; the first time you run it, it will seed the database with demo data.
