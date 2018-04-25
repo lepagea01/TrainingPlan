@@ -265,5 +265,36 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
                 Assert.Null(result);
             }
         }
+
+        public class Update : WorkoutRepositoryTest
+        {
+            [Fact]
+            public void Should_return_null_when_the_workout_does_not_exist()
+            {
+                // Arrange
+                var expectedWorkout = new Workout { Name = "Test workout 01" };
+
+                // Act
+                var result = RepositoryUnderTest.Update(expectedWorkout);
+
+                // Assert
+                Assert.Null(result);
+            }
+
+            [Fact]
+            public void Should_update_and_return_the_updated_workout()
+            {
+                // Arrange
+                var expectedWorkout = new Workout { Name = "Test workout 01" };
+                TrainingPlanContextMock.Workouts.Add(expectedWorkout);
+                TrainingPlanContextMock.SaveChanges();
+
+                // Act
+                var result = RepositoryUnderTest.Update(expectedWorkout);
+
+                // Assert
+                Assert.Same(expectedWorkout, result);
+            }
+        }
     }
 }

@@ -52,9 +52,6 @@ namespace TrainingPlan.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //Composition Root
-            services.TryAddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
-            services.TryAddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-
             services.TryAddScoped<IWorkoutService, WorkoutService>();
             services.TryAddScoped<IWorkoutRepository, WorkoutRepository>();
 
