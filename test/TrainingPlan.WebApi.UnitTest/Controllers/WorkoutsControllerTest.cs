@@ -132,7 +132,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             {
                 // Arrange
                 const int id = 1;
-                var expectedWorkout = new Workout { Name = "Test workout 01", Id = id };
+                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
                 ControllerUnderTest.ModelState.AddModelError("Id", "Some error");
 
                 // Act
@@ -141,6 +141,23 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
                 // Assert
                 var badRequestObjectResult = Assert.IsType<BadRequestObjectResult>(result);
                 Assert.IsType<SerializableError>(badRequestObjectResult.Value);
+            }
+
+            [Fact]
+            public async void Should_return_BadRequestResult_when_EntityIncorrectlyIdentifiedException_is_thrown()
+            {
+                // Arrange
+                const int id = 1;
+                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
+                WorkoutServiceMock
+                    .Setup(x => x.UpdateAsync(id + 1, expectedWorkout))
+                    .ThrowsAsync(new EntityIncorrectlyIdentifiedException(id + 1, expectedWorkout));
+
+                // Act
+                var result = await ControllerUnderTest.UpdateAsync(id + 1, expectedWorkout);
+
+                // Assert
+                Assert.IsType<BadRequestResult>(result);
             }
 
             [Fact]
@@ -158,23 +175,6 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
 
                 // Assert
                 Assert.IsType<NoContentResult>(result);
-            }
-
-            [Fact]
-            public async void Should_return_BadRequestResult_when_EntityIncorrectlyIdentifiedException_is_thrown()
-            {
-                // Arrange
-                const int id = 1;
-                var expectedWorkout = new Workout { Name = "Test workout 01", Id = id };
-                WorkoutServiceMock
-                    .Setup(x => x.UpdateAsync(id + 1, expectedWorkout))
-                    .ThrowsAsync(new EntityIncorrectlyIdentifiedException(id + 1, expectedWorkout));
-
-                // Act
-                var result = await ControllerUnderTest.UpdateAsync(id + 1, expectedWorkout);
-
-                // Assert
-                Assert.IsType<BadRequestResult>(result);
             }
 
             [Fact]

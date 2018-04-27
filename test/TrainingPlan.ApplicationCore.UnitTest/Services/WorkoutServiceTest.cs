@@ -163,27 +163,6 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
 
             [Fact]
-            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
-            {
-                // Arrange
-                const int id = 1;
-                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
-                WorkoutRepositoryMock
-                    .Setup(x => x.ReadOneAsync(id))
-                    .ReturnsAsync(default(Workout))
-                    .Verifiable();
-                WorkoutRepositoryMock
-                    .Setup(x => x.UpdateAsync(expectedWorkout))
-                    .Verifiable();
-
-                // Act, Assert
-                await Assert.ThrowsAsync<EntityNotFoundException>(() =>
-                    ServiceUnderTest.UpdateAsync(id, expectedWorkout));
-                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
-                WorkoutRepositoryMock.Verify(x => x.UpdateAsync(expectedWorkout), Times.Never);
-            }
-
-            [Fact]
             public async void
                 Should_throw_EntityIncorrectlyIdentifiedException_when_workout_id_does_not_match_workoutId()
             {
@@ -201,6 +180,27 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
                 await Assert.ThrowsAsync<EntityIncorrectlyIdentifiedException>(() =>
                     ServiceUnderTest.UpdateAsync(id + 1, expectedWorkout));
                 WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Never);
+                WorkoutRepositoryMock.Verify(x => x.UpdateAsync(expectedWorkout), Times.Never);
+            }
+
+            [Fact]
+            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
+            {
+                // Arrange
+                const int id = 1;
+                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
+                WorkoutRepositoryMock
+                    .Setup(x => x.ReadOneAsync(id))
+                    .ReturnsAsync(default(Workout))
+                    .Verifiable();
+                WorkoutRepositoryMock
+                    .Setup(x => x.UpdateAsync(expectedWorkout))
+                    .Verifiable();
+
+                // Act, Assert
+                await Assert.ThrowsAsync<EntityNotFoundException>(() =>
+                    ServiceUnderTest.UpdateAsync(id, expectedWorkout));
+                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
                 WorkoutRepositoryMock.Verify(x => x.UpdateAsync(expectedWorkout), Times.Never);
             }
         }

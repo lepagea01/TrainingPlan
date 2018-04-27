@@ -272,7 +272,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             public void Should_return_null_when_the_workout_does_not_exist()
             {
                 // Arrange
-                var expectedWorkout = new Workout { Name = "Test workout 01" };
+                var expectedWorkout = new Workout {Name = "Test workout 01"};
 
                 // Act
                 var result = RepositoryUnderTest.Update(expectedWorkout);
@@ -285,7 +285,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             public void Should_update_and_return_the_updated_workout()
             {
                 // Arrange
-                var expectedWorkout = new Workout { Name = "Test workout 01" };
+                var expectedWorkout = new Workout {Name = "Test workout 01"};
                 TrainingPlanContextMock.Workouts.Add(expectedWorkout);
                 TrainingPlanContextMock.SaveChanges();
 
