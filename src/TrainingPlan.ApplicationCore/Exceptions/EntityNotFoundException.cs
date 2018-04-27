@@ -1,10 +1,10 @@
-﻿using TrainingPlan.ApplicationCore.Entities;
+﻿using TrainingPlan.ApplicationCore.Interfaces;
 
 namespace TrainingPlan.ApplicationCore.Exceptions
 {
     public class EntityNotFoundException : TrainingPlanException
     {
-        public EntityNotFoundException(BaseEntity entity)
+        public EntityNotFoundException(IBaseEntity entity)
             : base($"Entity {entity.Id} was not found.")
         {
         }

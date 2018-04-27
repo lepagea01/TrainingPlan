@@ -50,8 +50,8 @@ namespace TrainingPlan.Infrastructure.Data
             // I preferred a two-step approach here in order to avoid testing property
             //  existence when irrelevant (e.g. EntityState.Unchanged...).
             foreach (var entry in entries.Where(e =>
-                                                e.Metadata.GetProperties().Any(p => p.Name == "CreationDate") &&
-                                                e.Metadata.GetProperties().Any(p => p.Name == "LastModificationDate")))
+                e.Metadata.GetProperties().Any(p => p.Name == "CreationDate") &&
+                e.Metadata.GetProperties().Any(p => p.Name == "LastModificationDate")))
             {
                 var now = DateTime.UtcNow;
                 entry.Property("LastModificationDate").CurrentValue = now;
