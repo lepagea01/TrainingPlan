@@ -1,6 +1,8 @@
-﻿using System;
+﻿using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TrainingPlan.WebMvc.Infrastructure
 {
@@ -24,7 +26,14 @@ namespace TrainingPlan.WebMvc.Infrastructure
 
         public async Task<HttpResponseMessage> PostEntityAsync<T>(string uri, T entity)
         {
-            throw new NotImplementedException();
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json")
+            };
+            var response = await _httpClient.SendAsync(requestMessage);
+            if (response.StatusCode == HttpStatusCode.InternalServerError) throw new HttpRequestException();
+
+            return response;
         }
     }
 }

@@ -62,8 +62,7 @@ namespace TrainingPlan.WebMvc.Controllers
 
             if (viewModel == null) return NotFound();
 
-//            return View(viewModel);            
-            return null;
+            return View(viewModel);            
         }
     }
 }
