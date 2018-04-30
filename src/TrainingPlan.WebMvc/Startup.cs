@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using TrainingPlan.WebMvc.Infrastructure;
+using TrainingPlan.WebMvc.Services;
 
 namespace TrainingPlan.WebMvc
 {
@@ -17,6 +21,13 @@ namespace TrainingPlan.WebMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Composition Root
+            services.TryAddScoped<IWorkoutService, WorkoutService>();
+            services.AddAutoMapper(typeof(Startup));
+
+            services.Configure<AppSettings>(Configuration);
+            services.TryAddSingleton<IHttpClient, StandardHttpClient>();
+
             services.AddMvc();
         }
 

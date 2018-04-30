@@ -85,7 +85,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class CreateAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_BadRequestObjectResult()
+            public async void Should_return_BadRequestObjectResult_when_ModelStateIsInvalid()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -128,7 +128,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class UpdateAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_BadRequestObjectResult()
+            public async void Should_return_BadRequestObjectResult_when_ModelStateIsInvalid()
             {
                 // Arrange
                 const int id = 1;

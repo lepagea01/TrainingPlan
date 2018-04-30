@@ -30,6 +30,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainingPlan.WebMvc.UnitTest", "test\TrainingPlan.WebMvc.UnitTest\TrainingPlan.WebMvc.UnitTest.csproj", "{D48F201D-AE46-4627-A7BE-52D91D370020}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +74,10 @@ Global
 		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D48F201D-AE46-4627-A7BE-52D91D370020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48F201D-AE46-4627-A7BE-52D91D370020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48F201D-AE46-4627-A7BE-52D91D370020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48F201D-AE46-4627-A7BE-52D91D370020}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +92,7 @@ Global
 		{13793439-FA18-4244-BBB9-B1AFF91A2BEB} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 		{E61C1F64-419D-4E75-B427-63F2CC2BBE6D} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 		{E80088E8-6D4A-4AEA-A94F-6F0D6B0B79F2} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
+		{D48F201D-AE46-4627-A7BE-52D91D370020} = {F817FFA9-7FE5-4E1F-A7E0-1E10F5827341}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09A7345D-4927-4DA9-88C9-DA944A06C604}
