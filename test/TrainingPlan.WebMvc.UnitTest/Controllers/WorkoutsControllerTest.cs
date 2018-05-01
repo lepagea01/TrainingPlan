@@ -44,7 +44,7 @@ namespace TrainingPlan.WebMvc.UnitTest.Controllers
             }
         }
 
-        public class Details : WorkoutsControllerTest
+        public class Edit : WorkoutsControllerTest
         {
             [Fact]
             public async Task Get_Returns_ViewResult_With_Workout_When_WorkoutIsFound()
@@ -57,7 +57,7 @@ namespace TrainingPlan.WebMvc.UnitTest.Controllers
                     .ReturnsAsync(expectedWorkout);
 
                 // Act
-                var result = await ControllerUnderTest.Details(id);
+                var result = await ControllerUnderTest.Edit(id);
 
                 // Assert
                 var viewResult = Assert.IsType<ViewResult>(result);
@@ -74,7 +74,7 @@ namespace TrainingPlan.WebMvc.UnitTest.Controllers
                     .ReturnsAsync(default(WorkoutViewModel));
 
                 // Act
-                var result = await ControllerUnderTest.Details(id);
+                var result = await ControllerUnderTest.Edit(id);
 
                 // Assert
                 Assert.IsType<NotFoundResult>(result);

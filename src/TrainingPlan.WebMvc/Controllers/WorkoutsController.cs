@@ -24,17 +24,6 @@ namespace TrainingPlan.WebMvc.Controllers
             return View(viewModel);
         }
 
-        // GET: Workouts/Details/5
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Details([FromRoute] int id)
-        {
-            var viewModel = await _workoutService.GetByIdAsync(id);
-
-            if (viewModel == null) return NotFound();
-
-            return View(viewModel);
-        }
-
         // GET: Workouts/Create
         [HttpGet("[action]")]
 #pragma warning disable 1998
@@ -56,13 +45,27 @@ namespace TrainingPlan.WebMvc.Controllers
 
         // GET: Workouts/Edit/5
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit([FromRoute] int id)
         {
             var viewModel = await _workoutService.GetByIdAsync(id);
 
             if (viewModel == null) return NotFound();
 
             return View(viewModel);            
+        }
+
+        // POST: Workouts/Edit/5
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> Edit([FromRoute] int id, [FromForm] WorkoutViewModel viewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        // POST: Workouts/Delete/5
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
