@@ -37,7 +37,7 @@ namespace TrainingPlan.WebMvc.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task<IEnumerable<WorkoutViewModel>> GetAllAsync()
+        public async Task<IEnumerable<WorkoutViewModel>> ReadAllAsync()
         {
             var uri = _remoteServiceBaseUrl;
             var dataString = await _httpClient.GetStringAsync(uri);
@@ -46,7 +46,7 @@ namespace TrainingPlan.WebMvc.Services
                 JsonConvert.DeserializeObject<List<Workout>>(dataString));
         }
 
-        public async Task<WorkoutViewModel> GetByIdAsync(int id)
+        public async Task<WorkoutViewModel> ReadOneAsync(int id)
         {
             var uri = $"{_remoteServiceBaseUrl}/{id}";
             var dataString = await _httpClient.GetStringAsync(uri);
@@ -54,6 +54,23 @@ namespace TrainingPlan.WebMvc.Services
             return dataString != null
                 ? _mapper.Map<Workout, WorkoutViewModel>(JsonConvert.DeserializeObject<Workout>(dataString))
                 : null;
+        }
+
+        public async Task UpdateAsync(int id, WorkoutViewModel workoutViewModel)
+        {
+            var uri = $"{_remoteServiceBaseUrl}/{id}";
+            var response =
+                await _httpClient.PutEntityAsync(uri, _mapper.Map<WorkoutViewModel, Workout>(workoutViewModel));
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var uri = $"{_remoteServiceBaseUrl}/{id}";
+            var response = await _httpClient.DeleteAsync(uri);
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }

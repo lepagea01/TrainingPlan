@@ -19,7 +19,7 @@ namespace TrainingPlan.WebMvc.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var viewModel = await _workoutService.GetAllAsync();
+            var viewModel = await _workoutService.ReadAllAsync();
 
             return View(viewModel);
         }
@@ -47,25 +47,29 @@ namespace TrainingPlan.WebMvc.Controllers
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id)
         {
-            var viewModel = await _workoutService.GetByIdAsync(id);
+            var viewModel = await _workoutService.ReadOneAsync(id);
 
             if (viewModel == null) return NotFound();
 
-            return View(viewModel);            
+            return View(viewModel);
         }
 
         // POST: Workouts/Edit/5
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> Edit([FromRoute] int id, [FromForm] WorkoutViewModel viewModel)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid) return View(viewModel);
+
+            await _workoutService.UpdateAsync(id, viewModel);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Workouts/Delete/5
         [HttpPost("[action]/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            throw new NotImplementedException();
+            await _workoutService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

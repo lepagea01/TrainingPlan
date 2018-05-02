@@ -7,7 +7,9 @@ namespace TrainingPlan.WebMvc.Services
     public interface IWorkoutService
     {
         Task CreateAsync(WorkoutViewModel workoutViewModel);
-        Task<IEnumerable<WorkoutViewModel>> GetAllAsync();
-        Task<WorkoutViewModel> GetByIdAsync(int id);
+        Task<IEnumerable<WorkoutViewModel>> ReadAllAsync();
+        Task<WorkoutViewModel> ReadOneAsync(int id);
+        Task UpdateAsync(int id, WorkoutViewModel workoutViewModel);
+        Task DeleteAsync(int id);
     }
 }

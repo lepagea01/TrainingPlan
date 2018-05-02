@@ -18,102 +18,104 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @if (Model != null && Model.Any())
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
         {
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        <div class="delete-section">
-                            <a class="delete-link" href="@Url.Action("Delete", new {id = item.Id})">Delete</a>
-                            <div class="btn btn-primary delete-confirm" style="display:none" data-delete-id="@item.Id">Confirm Delete</div>
-                        </div>
-                        @*@Html.ActionLink("Delete", "Delete", new {id = item.Id})*@
-                    </td>
-                </tr>
-            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                    <div class="delete-section">
+                        <a class="delete-link" href="@Url.Action("Delete", new {id = item.Id})">Delete</a>
+                        <div class="btn btn-primary delete-confirm" style="display: none" data-delete-id="@item.Id">Confirm Delete</div>
+                    </div>
+                    @*@Html.ActionLink("Delete", "Delete", new {id = item.Id})*@
+                </td>
+            </tr>
         }
+    }
     </tbody>
 </table>
 
 @section scripts{
     <script type="text/javascript">
-    $(function () {
-        $("a.delete-link").click(function () {
-            var deleteLink = $(this);
-            deleteLink.hide();
-            var confirmButton = deleteLink.siblings(".delete-confirm");
-            confirmButton.show();
+        $(function() {
+            $("a.delete-link").click(function() {
+                var deleteLink = $(this);
+                deleteLink.hide();
+                var confirmButton = deleteLink.siblings(".delete-confirm");
+                confirmButton.show();
 
-            var cancelDelete =  function () {
-                removeEvents();
-                showDeleteLink();
-            };
+                var cancelDelete = function() {
+                    removeEvents();
+                    showDeleteLink();
+                };
 
-            var deleteItem = function () {
-                removeEvents();
-                confirmButton.hide();
-                $.post(
-                    '@Url.Action("Delete")', { id: confirmButton.attr('data-delete-id') })
-                   .done(function () {
-                       var parentRow = deleteLink.parents("tr:first");
-                       parentRow.fadeOut('fast', function () {
-                           parentRow.remove();
-                       });
-                   }).fail(function (data) {
-                       alert("error");
-                   });
-                return false;
-            };
+                var deleteItem = function() {
+                    removeEvents();
+                    confirmButton.hide();
+                    var link = '@Url.Action("Delete", new {id = -1})';
+                    link = link.replace('-1', confirmButton.attr('data-delete-id'));
+                    $.post(link)
+                        .done(function() {
+                            var parentRow = deleteLink.parents("tr:first");
+                            parentRow.fadeOut('fast',
+                                function() {
+                                    parentRow.remove();
+                                });
+                        }).fail(function(data) {
+                            alert("error");
+                        });
+                    return false;
+                };
 
-            var removeEvents = function () {
-                confirmButton.off("click", deleteItem);
+                var removeEvents = function() {
+                    confirmButton.off("click", deleteItem);
+                    $(document).on("click", cancelDelete);
+                    $(document).off("keypress", onKeyUp);
+                };
+
+                var showDeleteLink = function() {
+                    confirmButton.hide();
+                    deleteLink.show();
+                };
+
+                var onKeyUp = function(e) {
+                    //Cancel if escape key pressed
+                    if (e.which === 27) {
+                        cancelDelete();
+                    }
+                };
+
+                confirmButton.on("click", deleteItem);
                 $(document).on("click", cancelDelete);
-                $(document).off("keypress", onKeyUp);
-            };
+                $(document).on("keyup", onKeyUp);
 
-            var showDeleteLink = function () {
-                confirmButton.hide();
-                deleteLink.show();
-            };
-
-            var onKeyUp = function (e) {
-                //Cancel if escape key pressed
-                if (e.which === 27) {
-                    cancelDelete();
-                }
-            };
-
-            confirmButton.on("click", deleteItem);
-            $(document).on("click", cancelDelete);
-            $(document).on("keyup", onKeyUp);
-
-            return false;
+                return false;
+            });
         });
-    });
     </script>
 }

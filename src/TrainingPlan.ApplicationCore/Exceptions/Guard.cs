@@ -9,7 +9,7 @@ namespace TrainingPlan.ApplicationCore.Exceptions
         {
             if (argument == null) throw new ArgumentNullException(argumentName);
         }
-        
+
         public static void AgainstEntityNotFound(int id, IBaseEntity entity)
         {
             if (entity == null) throw new EntityNotFoundException(id);

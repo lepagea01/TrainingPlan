@@ -21,12 +21,6 @@ namespace TrainingPlan.ApplicationCore.Services
             return await _workoutRepository.CreateAsync(workout);
         }
 
-        public async Task<Workout> DeleteAsync(int id)
-        {
-            await EnforceWorkoutExistenceAsync(id);
-            return await _workoutRepository.DeleteAsync(id);
-        }
-
         public async Task<IEnumerable<Workout>> ReadAllAsync()
         {
             return await _workoutRepository.ReadAllAsync();
@@ -42,6 +36,12 @@ namespace TrainingPlan.ApplicationCore.Services
             Guard.AgainstEntityIncorrectlyIdentified(id, workout);
             await EnforceWorkoutExistenceAsync(workout.Id);
             return await _workoutRepository.UpdateAsync(workout);
+        }
+
+        public async Task<Workout> DeleteAsync(int id)
+        {
+            await EnforceWorkoutExistenceAsync(id);
+            return await _workoutRepository.DeleteAsync(id);
         }
 
         private async Task<Workout> EnforceWorkoutExistenceAsync(int id)

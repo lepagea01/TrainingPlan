@@ -39,49 +39,6 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
         }
 
-        public class DeleteAsync : WorkoutServiceTest
-        {
-            [Fact]
-            public async void Should_enforce_workout_existence_and_delete()
-            {
-                // Arrange
-                const int id = 1;
-                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
-                WorkoutRepositoryMock
-                    .Setup(x => x.ReadOneAsync(id))
-                    .ReturnsAsync(expectedWorkout)
-                    .Verifiable();
-                WorkoutRepositoryMock
-                    .Setup(x => x.DeleteAsync(id))
-                    .ReturnsAsync(expectedWorkout)
-                    .Verifiable();
-
-                // Act, Assert
-                await ServiceUnderTest.DeleteAsync(id);
-                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
-                WorkoutRepositoryMock.Verify(x => x.DeleteAsync(id), Times.Once);
-            }
-
-            [Fact]
-            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
-            {
-                // Arrange
-                const int id = 1;
-                WorkoutRepositoryMock
-                    .Setup(x => x.ReadOneAsync(id))
-                    .ReturnsAsync(default(Workout))
-                    .Verifiable();
-                WorkoutRepositoryMock
-                    .Setup(x => x.DeleteAsync(id))
-                    .Verifiable();
-
-                // Act, Assert
-                await Assert.ThrowsAsync<EntityNotFoundException>(() => ServiceUnderTest.DeleteAsync(id));
-                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
-                WorkoutRepositoryMock.Verify(x => x.DeleteAsync(id), Times.Never);
-            }
-        }
-
         public class ReadAllAsync : WorkoutServiceTest
         {
             [Fact]
@@ -202,6 +159,49 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
                     ServiceUnderTest.UpdateAsync(id, expectedWorkout));
                 WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
                 WorkoutRepositoryMock.Verify(x => x.UpdateAsync(expectedWorkout), Times.Never);
+            }
+        }
+
+        public class DeleteAsync : WorkoutServiceTest
+        {
+            [Fact]
+            public async void Should_enforce_workout_existence_and_delete()
+            {
+                // Arrange
+                const int id = 1;
+                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
+                WorkoutRepositoryMock
+                    .Setup(x => x.ReadOneAsync(id))
+                    .ReturnsAsync(expectedWorkout)
+                    .Verifiable();
+                WorkoutRepositoryMock
+                    .Setup(x => x.DeleteAsync(id))
+                    .ReturnsAsync(expectedWorkout)
+                    .Verifiable();
+
+                // Act, Assert
+                await ServiceUnderTest.DeleteAsync(id);
+                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
+                WorkoutRepositoryMock.Verify(x => x.DeleteAsync(id), Times.Once);
+            }
+
+            [Fact]
+            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
+            {
+                // Arrange
+                const int id = 1;
+                WorkoutRepositoryMock
+                    .Setup(x => x.ReadOneAsync(id))
+                    .ReturnsAsync(default(Workout))
+                    .Verifiable();
+                WorkoutRepositoryMock
+                    .Setup(x => x.DeleteAsync(id))
+                    .Verifiable();
+
+                // Act, Assert
+                await Assert.ThrowsAsync<EntityNotFoundException>(() => ServiceUnderTest.DeleteAsync(id));
+                WorkoutRepositoryMock.Verify(x => x.ReadOneAsync(id), Times.Once);
+                WorkoutRepositoryMock.Verify(x => x.DeleteAsync(id), Times.Never);
             }
         }
     }
