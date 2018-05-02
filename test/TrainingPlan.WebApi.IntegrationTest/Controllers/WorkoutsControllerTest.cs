@@ -9,7 +9,7 @@ namespace TrainingPlan.WebApi.IntegrationTest.Controllers
         public class ReadAllAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async Task Should_return_response_ok_status_code()
+            public async Task Returns_Response_With_OkStatusCode()
             {
                 // Arrange
 

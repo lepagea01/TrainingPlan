@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using TrainingPlan.ApplicationCore.Entities;
@@ -23,7 +24,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class ReadAllAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_OkObjectResult_with_workouts()
+            public async Task ReadAllAsync_Returns_OkObjectResult_With_Workouts()
             {
                 // Arrange
                 var expectedWorkouts = new[]
@@ -48,7 +49,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class ReadOneAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_NotFoundResult_when_EntityNotFoundException_is_thrown()
+            public async Task ReadOneAsync_Returns_NotFoundResult_When_EntityNotFoundException_Is_Thrown()
             {
                 // Arrange
                 const int id = 1;
@@ -64,7 +65,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_OkObjectResult_with_a_workout()
+            public async Task ReadOneAsync_Returns_OkObjectResult_With_Workout()
             {
                 // Arrange
                 const int id = 1;
@@ -85,7 +86,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class CreateAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_BadRequestObjectResult_when_ModelStateIsInvalid()
+            public async Task CreateAsync_Returns_BadRequestObjectResult_When_ModelStateIsInvalid()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -100,7 +101,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_CreatedAtActionResult_with_the_created_workout()
+            public async Task CreateAsync_Returns_CreatedAtActionResult_With_Workout()
             {
                 // Arrange
                 const int id = 1;
@@ -128,7 +129,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class UpdateAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_BadRequestObjectResult_when_ModelStateIsInvalid()
+            public async Task UpdateAsync_Returns_BadRequestObjectResult_When_ModelStateIsInvalid()
             {
                 // Arrange
                 const int id = 1;
@@ -144,7 +145,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_BadRequestResult_when_EntityIncorrectlyIdentifiedException_is_thrown()
+            public async Task UpdateAsync_Returns_BadRequestResult_When_EntityIncorrectlyIdentifiedException_Is_Thrown()
             {
                 // Arrange
                 const int id = 1;
@@ -161,7 +162,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_NoContentResult()
+            public async Task UpdateAsync_Returns_NoContentResult()
             {
                 // Arrange
                 const int id = 1;
@@ -178,7 +179,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_NotFoundResult_when_EntityNotFoundException_is_thrown()
+            public async Task UpdateAsync_Returns_NotFoundResult_When_EntityNotFoundException_Is_Thrown()
             {
                 // Arrange
                 const int id = 1;
@@ -198,7 +199,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
         public class DeleteAsync : WorkoutsControllerTest
         {
             [Fact]
-            public async void Should_return_NoContentResult()
+            public async Task DeleteAsync_Returns_NoContentResult()
             {
                 // Arrange
                 const int id = 1;
@@ -215,7 +216,7 @@ namespace TrainingPlan.WebApi.UnitTest.Controllers
             }
 
             [Fact]
-            public async void Should_return_NotFoundResult_when_EntityNotFoundException_is_thrown()
+            public async Task DeleteAsync_Returns_NotFoundResult_When_EntityNotFoundException_Is_Thrown()
             {
                 // Arrange
                 const int id = 1;

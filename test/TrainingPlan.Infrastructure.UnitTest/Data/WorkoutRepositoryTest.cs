@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TrainingPlan.ApplicationCore.Entities;
 using TrainingPlan.Infrastructure.Data;
@@ -24,7 +25,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
         public class CreateAsync : WorkoutRepositoryTest
         {
             [Fact]
-            public async void Should_create_and_return_the_created_workout()
+            public async Task CreateAsync_Creates_And_Returns_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -37,42 +38,10 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             }
         }
 
-        public class DeleteAsync : WorkoutRepositoryTest
-        {
-            [Fact]
-            public async void Should_delete_and_return_the_deleted_workout()
-            {
-                // Arrange
-                var expectedWorkout = new Workout {Name = "Test workout 01"};
-                TrainingPlanContextMock.Workouts.Add(expectedWorkout);
-                await TrainingPlanContextMock.SaveChangesAsync();
-                var id = expectedWorkout.Id;
-
-                // Act
-                var result = await RepositoryUnderTest.DeleteAsync(id);
-
-                // Assert
-                Assert.Same(expectedWorkout, result);
-            }
-
-            [Fact]
-            public async void Should_return_null_when_the_workout_does_not_exist()
-            {
-                // Arrange
-                const int id = 1;
-
-                // Act
-                var result = await RepositoryUnderTest.DeleteAsync(id);
-
-                // Assert
-                Assert.Null(result);
-            }
-        }
-
         public class ReadAllAsync : WorkoutRepositoryTest
         {
             [Fact]
-            public async void Should_return_all_workouts()
+            public async Task ReadAllAsync_Returns_Workouts()
             {
                 // Arrange
                 var expectedWorkouts = new[]
@@ -99,7 +68,20 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
         public class ReadOneAsync : WorkoutRepositoryTest
         {
             [Fact]
-            public async void Should_return_a_workout()
+            public async Task ReadOneAsync_Returns_Null_When_WorkoutDoesNotExist()
+            {
+                // Arrange
+                const int id = 1;
+
+                // Act
+                var result = await RepositoryUnderTest.ReadOneAsync(id);
+
+                // Assert
+                Assert.Null(result);
+            }
+
+            [Fact]
+            public async Task ReadOneAsync_Returns_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -113,15 +95,34 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
                 // Assert
                 Assert.Same(expectedWorkout, result);
             }
+        }
+
+        public class DeleteAsync : WorkoutRepositoryTest
+        {
+            [Fact]
+            public async Task DeleteAsync_Deletes_And_Returns_Workout()
+            {
+                // Arrange
+                var expectedWorkout = new Workout {Name = "Test workout 01"};
+                TrainingPlanContextMock.Workouts.Add(expectedWorkout);
+                await TrainingPlanContextMock.SaveChangesAsync();
+                var id = expectedWorkout.Id;
+
+                // Act
+                var result = await RepositoryUnderTest.DeleteAsync(id);
+
+                // Assert
+                Assert.Same(expectedWorkout, result);
+            }
 
             [Fact]
-            public async void Should_return_null_when_the_workout_does_not_exist()
+            public async Task DeleteAsync_Returns_Null_When_WorkoutDoesNotExist()
             {
                 // Arrange
                 const int id = 1;
 
                 // Act
-                var result = await RepositoryUnderTest.ReadOneAsync(id);
+                var result = await RepositoryUnderTest.DeleteAsync(id);
 
                 // Assert
                 Assert.Null(result);
@@ -131,7 +132,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
         public class UpdateAsync : WorkoutRepositoryTest
         {
             [Fact]
-            public async void Should_return_null_when_the_workout_does_not_exist()
+            public async Task UpdateAsync_Returns_Null_When_Workout_DoesNotExist()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -144,7 +145,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             }
 
             [Fact]
-            public async void Should_update_and_return_the_updated_workout()
+            public async Task UpdateAsync_Updates_And_Return_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -162,7 +163,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
         public class Create : WorkoutRepositoryTest
         {
             [Fact]
-            public void Should_create_and_return_the_created_workout()
+            public void Create_Creates_And_Returns_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -175,42 +176,10 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             }
         }
 
-        public class Delete : WorkoutRepositoryTest
-        {
-            [Fact]
-            public void Should_delete_and_return_the_deleted_workout()
-            {
-                // Arrange
-                var expectedWorkout = new Workout {Name = "Test workout 01"};
-                TrainingPlanContextMock.Workouts.Add(expectedWorkout);
-                TrainingPlanContextMock.SaveChanges();
-                var id = expectedWorkout.Id;
-
-                // Act
-                var result = RepositoryUnderTest.Delete(id);
-
-                // Assert
-                Assert.Same(expectedWorkout, result);
-            }
-
-            [Fact]
-            public void Should_return_null_when_the_workout_does_not_exist()
-            {
-                // Arrange
-                const int id = 1;
-
-                // Act
-                var result = RepositoryUnderTest.Delete(id);
-
-                // Assert
-                Assert.Null(result);
-            }
-        }
-
         public class ReadAll : WorkoutRepositoryTest
         {
             [Fact]
-            public void Should_return_all_workouts()
+            public void ReadAll_Returns_Workouts()
             {
                 // Arrange
                 var expectedWorkouts = new[]
@@ -237,7 +206,20 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
         public class ReadOne : WorkoutRepositoryTest
         {
             [Fact]
-            public void Should_return_a_workout()
+            public void ReadOne_Returns_Null_When_WorkoutDoesNotExist()
+            {
+                // Arrange
+                const int id = 1;
+
+                // Act
+                var result = RepositoryUnderTest.ReadOne(id);
+
+                // Assert
+                Assert.Null(result);
+            }
+
+            [Fact]
+            public void ReadOne_Returns_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -251,25 +233,12 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
                 // Assert
                 Assert.Same(expectedWorkout, result);
             }
-
-            [Fact]
-            public void Should_return_null_when_the_workout_does_not_exist()
-            {
-                // Arrange
-                const int id = 1;
-
-                // Act
-                var result = RepositoryUnderTest.ReadOne(id);
-
-                // Assert
-                Assert.Null(result);
-            }
         }
 
         public class Update : WorkoutRepositoryTest
         {
             [Fact]
-            public void Should_return_null_when_the_workout_does_not_exist()
+            public void Update_Returns_Null_When_WorkoutDoesNotExist()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -282,7 +251,7 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
             }
 
             [Fact]
-            public void Should_update_and_return_the_updated_workout()
+            public void Update_Updates_And_Returns_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -294,6 +263,38 @@ namespace TrainingPlan.Infrastructure.UnitTest.Data
 
                 // Assert
                 Assert.Same(expectedWorkout, result);
+            }
+        }
+
+        public class Delete : WorkoutRepositoryTest
+        {
+            [Fact]
+            public void Delete_Deletes_And_Returns_Workout()
+            {
+                // Arrange
+                var expectedWorkout = new Workout {Name = "Test workout 01"};
+                TrainingPlanContextMock.Workouts.Add(expectedWorkout);
+                TrainingPlanContextMock.SaveChanges();
+                var id = expectedWorkout.Id;
+
+                // Act
+                var result = RepositoryUnderTest.Delete(id);
+
+                // Assert
+                Assert.Same(expectedWorkout, result);
+            }
+
+            [Fact]
+            public void Delete_Returns_Null_When_WorkoutDoesNotExist()
+            {
+                // Arrange
+                const int id = 1;
+
+                // Act
+                var result = RepositoryUnderTest.Delete(id);
+
+                // Assert
+                Assert.Null(result);
             }
         }
     }

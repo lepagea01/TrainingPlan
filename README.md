@@ -1,6 +1,6 @@
 # Training Plan
 
-This repo contains the sample code of a Web application dedicated to managing training plans for runners.
+This repo contains the sample code of a Web API and a Web client combinations dedicated to managing training plans for runners.
 
 It uses .NET Core 2.x and is inspired by the following reference architectures:
 
@@ -11,13 +11,15 @@ as well as the following code samples:
 
 - [Design Patterns: Asp.Net Core Web API, services, and repositories](http://www.forevolve.com/en/articles/2017/08/11/design-patterns-web-api-service-and-repository-part-1/) blog series by ForEvolve
 
-As suggested by Clean architecture advocates, the code is organized in three main projects:
+As suggested by Clean architecture advocates, the Web API code is organized in three main projects:
 
 - **TrainingPlan.ApplicationCore**: POCO entities, application exceptions, interfaces, business services...
 - **TrainingPlan.Infrastructure**: only the EF-based data access layer currently but other infrastructure services eventually
 - **TrainingPlan.WebApi**: MVC-based RESTful Web API for basic CRUD operations; this Web application is the sole access point for the time being
 
-The code also includes a fourth project, *TrainingPlan.WebMvc*: it is based on a MVC template, is currently irrelevant and will eventually be completed or replaced by a proper user-facing Web application.
+The code also includes a fourth project:
+
+- **TrainingPlan.WebMvc**: MVC-based Web application solely meant for providing a first client for the Web API; it will eventually be completed or replaced by a proper user-facing Web application.
 
 > ### DISCLAIMER
 > **IMPORTANT:** The current state of this application is 0.0. It is open to community feedback and contributions. **Feedback with improvements and pull requests from the community are highly appreciated and will be accepted if possible.**
@@ -41,4 +43,6 @@ dotnet ef database update -c TrainingPlanContext -s TrainingPlan.WebApi.csproj -
 
    The first command makes sure all dependencies and tools of the TrainingPlan.WebApi project are restored while the second will create the sole database for the sample.
 
-3. Run the sample; the first time you run it, it will seed the database with demo data.
+3. Run the TrainingPlan.WebApi sample; the first the first time you run it, it will seed the database with demo data.
+
+4. Test it with typical API development tools (e.g. [Postman](https://www.getpostman.com/)); optionally, test it by also running the TrainingPlan.WebMvc sample.

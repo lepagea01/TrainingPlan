@@ -192,6 +192,34 @@ namespace TrainingPlan.WebMvc.UnitTest.Services
         public class UpdateAsync : WorkoutServiceTest
         {
             [Fact]
+            public async Task UpdateAsync_Maps_Puts_And_Throws_HttpRequestException_When_ApiCall_Fails()
+            {
+                // Arrange
+                const int id = 1;
+                var expectedWorkoutViewModel = new WorkoutViewModel {Name = "Test workout 01", Id = id};
+                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
+
+                MapperMock
+                    .Setup(x => x.Map<WorkoutViewModel, Workout>(expectedWorkoutViewModel))
+                    .Returns(expectedWorkout)
+                    .Verifiable();
+                HttpClientMock
+                    .Setup(x => x.PutEntityAsync(It.IsAny<string>(), expectedWorkout))
+                    .ReturnsAsync(new HttpResponseMessage
+                    {
+                        StatusCode = HttpStatusCode.InternalServerError,
+                        Content = new StringContent("Content as string")
+                    })
+                    .Verifiable();
+
+                // Act, Assert
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    ServiceUnderTest.UpdateAsync(id, expectedWorkoutViewModel));
+                MapperMock.Verify(x => x.Map<WorkoutViewModel, Workout>(expectedWorkoutViewModel), Times.Once);
+                HttpClientMock.Verify(x => x.PutEntityAsync(It.IsAny<string>(), expectedWorkout), Times.Once);
+            }
+
+            [Fact]
             public async Task UpdateSync_Maps_Puts_And_Completes_When_ApiCall_Succeds()
             {
                 // Arrange
@@ -219,36 +247,8 @@ namespace TrainingPlan.WebMvc.UnitTest.Services
                 MapperMock.Verify(x => x.Map<WorkoutViewModel, Workout>(expectedWorkoutViewModel), Times.Once);
                 HttpClientMock.Verify(x => x.PutEntityAsync(It.IsAny<string>(), expectedWorkout), Times.Once);
             }
-            
-            [Fact]
-            public async Task UpdateAsync_Maps_Puts_And_Throws_HttpRequestException_When_ApiCall_Fails()
-            {
-                // Arrange
-                const int id = 1;
-                var expectedWorkoutViewModel = new WorkoutViewModel {Name = "Test workout 01", Id = id};
-                var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
-
-                MapperMock
-                    .Setup(x => x.Map<WorkoutViewModel, Workout>(expectedWorkoutViewModel))
-                    .Returns(expectedWorkout)
-                    .Verifiable();
-                HttpClientMock
-                    .Setup(x => x.PutEntityAsync(It.IsAny<string>(), expectedWorkout))
-                    .ReturnsAsync(new HttpResponseMessage
-                    {
-                        StatusCode = HttpStatusCode.InternalServerError,
-                        Content = new StringContent("Content as string")
-                    })
-                    .Verifiable();
-
-                // Act, Assert
-                await Assert.ThrowsAsync<HttpRequestException>(() =>
-                    ServiceUnderTest.UpdateAsync(id, expectedWorkoutViewModel));
-                MapperMock.Verify(x => x.Map<WorkoutViewModel, Workout>(expectedWorkoutViewModel), Times.Once);
-                HttpClientMock.Verify(x => x.PutEntityAsync(It.IsAny<string>(), expectedWorkout), Times.Once);
-            }
         }
-        
+
         public class DeleteAsync : WorkoutServiceTest
         {
             [Fact]

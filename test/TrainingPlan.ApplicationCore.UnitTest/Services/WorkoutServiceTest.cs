@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Moq;
 using TrainingPlan.ApplicationCore.Entities;
 using TrainingPlan.ApplicationCore.Exceptions;
@@ -21,7 +22,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
         public class CreateAsync : WorkoutServiceTest
         {
             [Fact]
-            public async void Should_create_and_return_the_created_workout()
+            public async Task CreateAsync_Creates_And_Returns_Created_Workout()
             {
                 // Arrange
                 var expectedWorkout = new Workout {Name = "Test workout 01"};
@@ -42,7 +43,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
         public class ReadAllAsync : WorkoutServiceTest
         {
             [Fact]
-            public async void Should_return_all_workouts()
+            public async Task ReadAllAsync_Returns_All_Workouts()
             {
                 // Arrange
                 var expectedWorkouts = new[]
@@ -66,7 +67,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
         public class ReadOneAsync : WorkoutServiceTest
         {
             [Fact]
-            public async void Should_return_a_workout()
+            public async Task ReadOneAsync_Returns_A_Workout()
             {
                 // Arrange
                 const int id = 1;
@@ -83,7 +84,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
 
             [Fact]
-            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
+            public async Task ReadOneAsync_Throws_EntityNotFoundException_When_Workout_DoesNotExist()
             {
                 // Arrange
                 const int id = 1;
@@ -99,7 +100,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
         public class UpdateAsync : WorkoutServiceTest
         {
             [Fact]
-            public async void Should_enforce_workout_existence_and_update()
+            public async Task UpdateAsync_Enforces_Workout_Existence_And_Updates()
             {
                 // Arrange
                 const int id = 1;
@@ -120,8 +121,8 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
 
             [Fact]
-            public async void
-                Should_throw_EntityIncorrectlyIdentifiedException_when_workout_id_does_not_match_workoutId()
+            public async Task
+                UpdateAsync_Throws_EntityIncorrectlyIdentifiedException_When_Workout_Id_DoesNotMatchWorkoutId()
             {
                 const int id = 1;
                 var expectedWorkout = new Workout {Name = "Test workout 01", Id = id};
@@ -141,7 +142,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
 
             [Fact]
-            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
+            public async Task UpdateAsync_Throws_EntityNotFoundException_When_WorkoutDoesNotExist()
             {
                 // Arrange
                 const int id = 1;
@@ -165,7 +166,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
         public class DeleteAsync : WorkoutServiceTest
         {
             [Fact]
-            public async void Should_enforce_workout_existence_and_delete()
+            public async Task DeleteAsync_Enforces_Workout_Existence_And_Deletes()
             {
                 // Arrange
                 const int id = 1;
@@ -186,7 +187,7 @@ namespace TrainingPlan.ApplicationCore.UnitTest.Services
             }
 
             [Fact]
-            public async void Should_throw_EntityNotFoundException_when_workout_does_not_exist()
+            public async Task DeleteAsync_Throws_EntityNotFoundException_When_WorkoutDoesNotExist()
             {
                 // Arrange
                 const int id = 1;
