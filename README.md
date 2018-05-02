@@ -30,8 +30,6 @@ After cloning or downloading the sample you should be able to run it immediately
 
 `Startup.cs` also enables the use of a persistent database ([SQLite](https://www.sqlite.org)) through the `ASPNETCORE_ENVIRONMENT` environment variable, as explained below.
 
-### Configuring the sample to use SQLite
-
 1. Update the `ASPNETCORE_ENVIRONMENT` environment variable of the TrainingPlan.WebApi project and set it to `Development`; optionally, adjust the `DataConnection` connection string in the `appsettings.Development.json` file of the TrainingPlan.WebApi project.
 
 2. Open a command prompt in the TrainingPlan.WebApi folder and execute the following commands:
